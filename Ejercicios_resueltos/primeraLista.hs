@@ -15,7 +15,7 @@
 -- 0
 
 digito :: Int -> Integer -> Integer
-digito i n = (n `div` 10^(i-1)) `mod` 10
+digito i n = (n `div` 10 ^ i) `mod` 10
 
 ------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------
@@ -29,15 +29,23 @@ digito i n = (n `div` 10^(i-1)) `mod` 10
 -- *Main> sumaDeDígitos 0
 -- 0
 
-sumaDeDigitos1 :: Integer -> Integer -> Integer
-sumaDeDigitos1 1 n = digito 1 n
-sumaDeDigitos1  m n = sumaDeDigitos1 (m-1) n + digito (fromIntegral m) n
+sumaDeDigitos1 :: Int -> Integer -> Integer
+sumaDeDigitos1 0 n = digito 0 n
+sumaDeDigitos1  m n = sumaDeDigitos1 (m-1) n + digito m n
+
+numeroDeDigitos :: Integer -> Int
+numeroDeDigitos 0 = 0
+numeroDeDigitos n 
+              | n > 0 = 1 + numeroDeDigitos (n `div` 10)
 
 sumaDeDigitos :: Integer -> Integer
 sumaDeDigitos 0 = 0
-sumaDeDigitos n = sumaDeDigitos1 (n-1) n + digito (fromIntegral n) n 
+sumaDeDigitos n = sumaDeDigitos1 (numeroDeDigitos n - 1) n  
 
--- NOTA: Con 6 a + digitos el programa se demora mucho en calcularlo
+-- Otra forma:
+--sumaDeDigitos :: Integer -> Integer
+--sumaDeDigitos n 
+--            | n > 0 = n `mod` 10 + sumaDeDigitos (n `div` 10)
 
 ------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------
