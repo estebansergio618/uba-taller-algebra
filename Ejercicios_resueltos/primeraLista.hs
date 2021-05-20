@@ -80,23 +80,21 @@ sumaDeDigitos n = sumaDeDigitos1 (numeroDeDigitos n - 1) n
 -- *Main> factorial 0
 -- 1
 
-buscarFactorial' :: Integer -> Integer -> Integer -> Integer
-buscarFactorial' n i a
-  | b > n                = b
-  | otherwise            = buscarFactorial' n (i + 1) b
-  where b = i * a
+---paso1--pas2---paso3----paso4----------paso5
+-- 1!-----2!-------3!--------4!------------5!
+-- 1------2--------6--------24------------120
 
-menorFactorialMayorQue :: Integer -> Integer
-menorFactorialMayorQue n = buscarFactorial' n 1 1
-
-desigualdad :: Integer -> Integer
-desigualdad n = floor ((fromIntegral n/3)^n)
+paso :: Integer -> Integer -> Integer
+paso b 1         = b
+paso b n 
+  | n > 1     = paso (b*n) (n-1)
+  | otherwise = error "Solo admite n positivos"
 
 factorial :: Integer -> Integer
-factorial 0 = 1
-factorial n = n*menorFactorialMayorQue (desigualdad n)
+factorial n = paso 1 n      
 
-            
+-- Nota: Hicimos el código un poco más eficiente, este calcula factoriales gigantes como factorial 300
+
 ------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------   
 

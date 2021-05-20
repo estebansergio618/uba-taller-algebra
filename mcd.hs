@@ -33,10 +33,14 @@ menorDivisorPrimo x =
   head [y | y <- 2 : [3,5..(ceiling . sqrt . fromIntegral) x] ++ [x]
           , x `mod` y == 0]
 
+paso1 :: Integer -> Integer -> Integer
+paso1 b 1     = b
+paso1 b n 
+  | n > 1     = paso1 (b*mayorDivisorPrimo (b + 1)) (n-1)
+  | otherwise = error "Solo admite n positivos"
+
 productoDePn :: Integer -> Integer
-productoDePn 1 = 2
-productoDePn n = p * ( mayorDivisorPrimo( p + 1 ) )
-                where p = productoDePn (n-1)
+productoDePn n = paso1  1 n
 
 pn :: Integer -> Integer
 pn 1 = 2
