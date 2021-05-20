@@ -15,7 +15,7 @@
 -- 0
 
 digito :: Int -> Integer -> Integer
-digito i n = (n `div` 10^(i-1)) `mod` 10
+digito i n = (n `div` 10 ^ i) `mod` 10
 
 ------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------
@@ -29,15 +29,22 @@ digito i n = (n `div` 10^(i-1)) `mod` 10
 -- *Main> sumaDeDígitos 0
 -- 0
 
-sumaDeDigitos1 :: Integer -> Integer -> Integer
-sumaDeDigitos1 1 n = digito 1 n
-sumaDeDigitos1  m n = sumaDeDigitos1 (m-1) n + digito (fromIntegral m) n
+sumaDeDigitos1 :: Int -> Integer -> Integer
+sumaDeDigitos1 0 n = digito 0 n
+sumaDeDigitos1  m n = sumaDeDigitos1 (m-1) n + digito m n
+
+numeroDeDigitos :: Integer -> Int
+numeroDeDigitos 1 = 1
+numeroDeDigitos n = 1 + numeroDeDigitos (n `div` 10)
 
 sumaDeDigitos :: Integer -> Integer
 sumaDeDigitos 0 = 0
-sumaDeDigitos n = sumaDeDigitos1 (n-1) n + digito (fromIntegral n) n 
+sumaDeDigitos n = sumaDeDigitos1 (numeroDeDigitos n - 1) n  
 
--- NOTA: Con 6 a + digitos el programa se demora mucho en calcularlo
+-- Otra forma:
+--sumaDeDigitos :: Integer -> Integer
+--sumaDeDigitos n 
+--            | n > 0 = n `mod` 10 + sumaDeDigitos (n `div` 10)
 
 ------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------
@@ -52,10 +59,15 @@ sumaDeDigitos n = sumaDeDigitos1 (n-1) n + digito (fromIntegral n) n
 -- 8
 -- *Main> dígitoMáximo 0
 -- 0
+-- unidad :: Integer -> Integer
+-- unidad n 
+--     | n < 10    = n 
+--     | otherwise = mod n 10
 
 -- digitoMaximo :: Integer -> Integer
+-- digitoMaximo n
+--     | unidad n > unidad ( div n 10) 
 
------ Necesito una funcion cantidad de digitos
 
 ------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------
@@ -68,10 +80,22 @@ sumaDeDigitos n = sumaDeDigitos1 (n-1) n + digito (fromIntegral n) n
 -- *Main> factorial 0
 -- 1
 
+buscarFactorial' :: Integer -> Integer -> Integer -> Integer
+buscarFactorial' n i a
+  | b > n                = b
+  | otherwise            = buscarFactorial' n (i + 1) b
+  where b = i * a
+
+menorFactorialMayorQue :: Integer -> Integer
+menorFactorialMayorQue n = buscarFactorial' n 1 1
+
+desigualdad :: Integer -> Integer
+desigualdad n = floor ((fromIntegral n/3)^n)
+
 factorial :: Integer -> Integer
-factorial n | n == 0 = 1
-            | n > 0 = n*(factorial (n-1))
-            | otherwise = undefined
+factorial 0 = 1
+factorial n = n*menorFactorialMayorQue (desigualdad n)
+
             
 ------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------   
@@ -126,4 +150,5 @@ pi_approx 0 = 3
 pi_approx n = 3 + 4*(sumaAlternada n)
 
 ------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------FIN----------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------

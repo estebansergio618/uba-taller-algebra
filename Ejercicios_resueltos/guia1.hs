@@ -35,7 +35,7 @@ algunoEs0 r1 0 = True
 algunoEs0 r2 r1 = False
 -}
 
---ambosSon0: dados dos n´umeros racionales, decide si ambos son iguales a 0 (hacerlo dos veces, una sin usar y otra usando pattern matching).
+--ambosSon0: dados dos números racionales, decide si ambos son iguales a 0 (hacerlo dos veces, una sin usar y otra usando pattern matching).
 
 --Sin pattern matching
 ambosSon0 :: Float -> Float -> Bool
@@ -51,9 +51,8 @@ ambosSon0 r1 r2 = False
 
 --esMultiploDe: dados dos números naturales, decidir si el primero es múltiplo del segundo
 
-esMultiploDe :: Int -> Int -> Bool
-esMultiploDe n1 n2 | mod n1 n2 == 0 = True
-                   | otherwise = False
+esMultiploDe :: Integer -> Integer -> Bool
+esMultiploDe n1 n2 = n2 `mod` n1 == 0
 
 --digitoUnidades: dado un número natural, extrae su dígito de las unidades.
 
