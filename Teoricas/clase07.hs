@@ -37,9 +37,7 @@ cardinal c = length c
 
 union :: Set Int -> Set Int -> Set Int
 union [] c          = c
-union (x:xs) c 
-    | pertenece x c = union xs c
-    | otherwise     = x : union xs c
+union (x:xs) c      = union xs (agregar x c)
 
 interseccion :: Set Int -> Set Int -> Set Int
 interseccion _ []          = []

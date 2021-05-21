@@ -84,16 +84,19 @@ sumaDeDigitos n = sumaDeDigitos1 (numeroDeDigitos n - 1) n
 -- 1!-----2!-------3!--------4!------------5!
 -- 1------2--------6--------24------------120
 
-paso :: Integer -> Integer -> Integer
-paso b 1         = b
-paso b n 
-  | n > 1     = paso (b*n) (n-1)
-  | otherwise = error "Solo admite n positivos"
+-- paso :: Integer -> Integer -> Integer
+-- paso b 1         = b
+-- paso b n 
+--   | n > 1     = paso (b*n) (n-1)
+--   | otherwise = error "Solo admite n positivos"
+
+-- factorial :: Integer -> Integer
+-- factorial n = paso 1 n      
 
 factorial :: Integer -> Integer
-factorial n = paso 1 n      
+factorial 0 = 1
+factorial n = n*factorial(n-1)
 
--- Nota: Hicimos el código un poco más eficiente, este calcula factoriales gigantes como factorial 300
 
 ------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------   
