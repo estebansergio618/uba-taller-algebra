@@ -1,0 +1,4 @@
+-- Algoritmo de la division
+-- El algoritmo que haremos funciona de manera lento y conceptual
+-- En la vida real se usa otros algoritmos para realizar la division sobre enteros
+-- Dados a y d enteros con d distinto de 0, existen unicos q,r enteros tal que a = qd + r y 0<=r<|d|

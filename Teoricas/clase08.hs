@@ -1,13 +1,7 @@
 -- Combinatoria
-paso :: Integer -> Integer -> Integer
-paso b 1         = b
-paso b n 
-  | n > 1     = paso (b*n) (n-1)
-  | otherwise = error "Solo admite n positivos"
-
 factorial :: Integer -> Integer
 factorial 0 = 1
-factorial n = paso 1 n     
+factorial n = n*factorial(n-1)
 -----------------------------------------------------------
 -- Ejercicio 1:
 combinatorio :: Integer -> Integer -> Integer
@@ -18,7 +12,17 @@ combinatorio1 _ 0 = 1
 combinatorio1 n k
     | n == k    = 1
     | otherwise = c
-    where c= (combinatorio1 (n-1) k) + (combinatorio1 (n-1) (k-1))
+    where c = (combinatorio1 (n-1) k) + (combinatorio1 (n-1) (k-1))
+-------------------------------------------------------------------------
+-- Combinatorio pensado con la wiki de la materia
+-- Un poco más eficiente
+binomial :: Integer -> Integer -> Integer
+binomial n m = producto n (n-m+1) `div` producto m 1
+
+producto :: Integer -> Integer -> Integer
+producto a b
+    | a < b     = 1
+    | otherwise = a * producto (a-1) b
 -------------------------------------------------------------------------
 type Set a = [a]
 vacio :: Set a
@@ -79,9 +83,9 @@ pascal n k
         columna n ---> [C(n,m), C(n+1,m), C(n+2,m), ..., C(n,m)]
 -}
 
-binomial :: Integer -> Integer -> Integer
+{-binomial :: Integer -> Integer -> Integer
 binomial n k = factorial n `div` (factorial k * factorial (n - k))
-
+-}
 fila :: Integer -> [Integer]
 fila n = filaAPartirDe n 0       
 
@@ -107,7 +111,7 @@ filaAPartirDe n m
 
 -- combinatorioS :: Integer -> Integer -> Integer
 -- combinatorioS n k = (productoParaCombinatorio n k) `div` (factorial k)
-
+---------------------------------------------------------------------------
 
 
 

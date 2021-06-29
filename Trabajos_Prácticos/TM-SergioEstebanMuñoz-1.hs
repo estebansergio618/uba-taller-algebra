@@ -23,6 +23,7 @@ esParMayor2 n = (n > 2) && n `mod` 2 == 0
 
 existeUn :: Integer -> Integer -> Bool
 existeUn n m 
+  | n < m                               = False
   | m > floor(sqrt(fromInteger n))      = True
   | n `mod` m == 0                      = False
   | otherwise                           = existeUn n (m+1)
@@ -88,4 +89,5 @@ contador ::Integer -> Integer -> Integer
 contador n 1   =  0
 contador n k   | esPrimo k && esPrimo (n-k) = 1 + contador n (k-1)
                | otherwise                  = contador n (k-1)
- 
+
+

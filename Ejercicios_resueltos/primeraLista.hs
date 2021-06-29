@@ -59,16 +59,14 @@ sumaDeDigitos n = sumaDeDigitos1 (numeroDeDigitos n - 1) n
 -- 8
 -- *Main> dígitoMáximo 0
 -- 0
--- unidad :: Integer -> Integer
--- unidad n 
---     | n < 10    = n 
---     | otherwise = mod n 10
 
--- digitoMaximo :: Integer -> Integer
--- digitoMaximo n
---     | unidad n > unidad ( div n 10) 
-
-
+digitoMaximo :: Integer -> Integer
+digitoMaximo 0                                  = 0
+digitoMaximo n 
+    | unidad > digitoMaximo (numeroSinLaUnidad) = unidad
+    | otherwise                                 = digitoMaximo (numeroSinLaUnidad)
+    where unidad            = n `mod` 10 
+          numeroSinLaUnidad = n `div` 10
 ------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------
 
@@ -79,19 +77,6 @@ sumaDeDigitos n = sumaDeDigitos1 (numeroDeDigitos n - 1) n
 -- 1
 -- *Main> factorial 0
 -- 1
-
----paso1--pas2---paso3----paso4----------paso5
--- 1!-----2!-------3!--------4!------------5!
--- 1------2--------6--------24------------120
-
--- paso :: Integer -> Integer -> Integer
--- paso b 1         = b
--- paso b n 
---   | n > 1     = paso (b*n) (n-1)
---   | otherwise = error "Solo admite n positivos"
-
--- factorial :: Integer -> Integer
--- factorial n = paso 1 n      
 
 factorial :: Integer -> Integer
 factorial 0 = 1
@@ -129,6 +114,15 @@ e_approx n = e_approx (n-1) + 1/fromIntegral (factorial n)
 -- *Main> unos 0
 -- 0
 
+-- 29 = 2^0   + 0*2^1  + 2^2 + 2^3 + 2^4 = 2^5-1
+-- 29 = 28 + 1    
+
+-- 28 = 2^2 + 2^3 + 2^4
+-- 28 = 28 + 0
+
+-- 27 = 26 + 1
+
+-- 26 = 26 + 0
 ------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------
 
